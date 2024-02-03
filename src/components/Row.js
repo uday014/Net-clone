@@ -24,10 +24,12 @@ function Row({ title, fetchURL, isLargeRow }) {
     if (trailerUrl) {
       setTrailerUrl("");
     } else {
+      console.log(movie.name);
       movieTrailer(movie?.name || "")
         .then((url) => {
           const urlParams = new URLSearchParams(new URL(url).search);
           setTrailerUrl(urlParams.get("v"));
+          console.log("trailerurl--" + urlParams.get("v"));
         })
         .catch((error) => console.log(error));
     }
@@ -58,6 +60,7 @@ function Row({ title, fetchURL, isLargeRow }) {
           />
         ))}
       </div>
+
       {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
     </div>
   );
